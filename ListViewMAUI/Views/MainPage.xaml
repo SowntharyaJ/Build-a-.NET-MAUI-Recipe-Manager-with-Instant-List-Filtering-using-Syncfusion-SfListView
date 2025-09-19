@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViewMAUI"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"      
+             Title="Reipes"
+             x:Class="ListViewMAUI.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:RecipeViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Behaviors>
+        <local:ListViewFilterBehavior />
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="Auto, *">
+        <Grid ColumnDefinitions="*, Auto">
+            <Entry x:Name="filterText" Placeholder="Search by recipe name" Margin="10"/>
+            <core:SfChip x:Name="add" Grid.Column="1" Text="&#xe754;" StrokeThickness="0" CornerRadius="30" FontFamily="MauiSampleFontIcon" FontSize="20" Command="{Binding AddRecipeCommand}"/>
+        </Grid>
+        <!-- Recipe List -->
+        <syncfusion:SfListView x:Name="listView"
+                                 Grid.Row="1"
+                                 ItemSize="94"
+                                 ItemsSource="{Binding Recipes}"
+                                 TapCommand="{Binding RecipeTappedCommand}"
+                                 ItemSpacing="1">
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="94"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border HorizontalOptions="Center" Grid.Row="0" Grid.Column="0" HeightRequest="72" WidthRequest="72" Padding="0" Stroke="Transparent">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="4"/>
+                            </Border.StrokeShape>
+                            <Image Source="{Binding Image}" HorizontalOptions="Center" VerticalOptions="Fill" HeightRequest="72" WidthRequest="72" Aspect="AspectFill"/>
+                        </Border>
+                        <Grid Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0"  Text="{Binding Name}" LineBreakMode="WordWrap" FontFamily="Roboto-Medium" FontSize="{OnPlatform Android={OnIdiom Phone=15, Tablet=22}, iOS=16, WinUI=14,MacCatalyst=16}" CharacterSpacing="0.1"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding PreprationTime}" FontSize="{OnPlatform Default=10,WinUI=12,MacCatalyst=12}" FontFamily="Roboto-Regular" HorizontalOptions="End" CharacterSpacing="0.15" Margin="0,0,11,0" Opacity="0.8"/>
+                            <Label Grid.Row="1" Grid.Column="0" LineBreakMode="WordWrap" LineHeight="{OnPlatform iOS={OnIdiom Tablet=1.2, Default=1.025}, Default=1.2}" Text="{Binding Description}" FontFamily="Roboto-Regular" FontSize="14" CharacterSpacing="0.1" Margin="0,4,0,0" Opacity="0.8" />
+                        </Grid>
+                        <BoxView Grid.Row="1" Grid.Column="1" Color="LightGrey" HeightRequest="1" VerticalOptions="End" />
+                    </Grid>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+     
+    </Grid>
+
+</ContentPage>

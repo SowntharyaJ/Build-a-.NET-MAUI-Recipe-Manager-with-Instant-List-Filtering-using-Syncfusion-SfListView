@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ListViewMAUI.RecipeDetailPage"
+             xmlns:viewmodel="clr-namespace:ListViewMAUI"
+             xmlns:chip="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
+             Title="Recipe Details">
+
+    <Grid Padding="20" RowDefinitions="Auto, *, Auto">
+
+        <Image Source="{Binding SelectedRecipe.Image}" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HeightRequest="200"
+                           WidthRequest="200"                
+                           Aspect="AspectFill"/>
+
+        <dataForm:SfDataForm x:Name="dataForm"
+                             DataObject="{Binding SelectedRecipe}"
+                             IsReadOnly="{Binding IsReadOnly}"        
+                             CommitMode="Manual"  
+                             Grid.Row="1"
+                             GenerateDataFormItem="OnGenerateDataFormItem"
+                             ValidationMode="Manual"
+                             />
+
+        <Grid ColumnDefinitions="Auto,Auto" HorizontalOptions="Center" Grid.Row="2" ColumnSpacing="10" Margin="0,20,0,0" IsVisible="{Binding IsReadOnly}">
+            <chip:SfChip Grid.Column="0" Text="Edit" Command="{Binding EditRecipeCommand}" StrokeThickness="0"  FontAttributes="Bold" FontSize="16"  />
+            <chip:SfChip Grid.Column="1" Text="Delete" Command="{Binding DeleteRecipeCommand}" StrokeThickness="0"  FontAttributes="Bold" FontSize="16" />
+        </Grid>
+
+        <Grid ColumnDefinitions="Auto,Auto" HorizontalOptions="Center" Grid.Row="2" ColumnSpacing="10" Margin="0,20,0,0" IsVisible="{Binding IsVisible}">
+            <chip:SfChip Grid.Column="0" Text="Save" Command="{Binding SaveCommand}" CommandParameter="{x:Reference dataForm}" StrokeThickness="0"  FontAttributes="Bold" FontSize="16"  />
+            <chip:SfChip Grid.Column="1" Text="Cancel" Command="{Binding CancelCommand}" StrokeThickness="0"  FontAttributes="Bold" FontSize="16" />
+        </Grid>
+    </Grid>
+</ContentPage>
