@@ -1,6 +1,6 @@
-# Build-a-.NET-MAUI-Recipe-Manager-with-Instant-List-Filtering-using-Syncfusion-SfListView
+# Build a .NET MAUI Recipe Manager with Instant List Filtering using Syncfusion ListView.
 
-Build a .NET MAUI Recipe Manager with Instant List Filtering using Syncfusion ListView.
+This example describes how to build a .NET MAUI Recipe Manager with Instant List Filtering using Syncfusion ListView.
 
 ## Sample
 
